@@ -1,0 +1,27 @@
+extends layout
+
+block links
+  link(rel='stylesheet', href='/css/loggedInNavbar.css')
+
+block content
+  h1 Add a book to your collection
+  form#addBookForm
+    .form-group
+      label(for='title') Title:
+      input#title.form-control(type='text', placeholder='title')
+    .form-group
+      label(for='author') Author:
+      input#author.form-control(type='text', placeholder='author')
+    .form-group
+      label(for='isbn') ISBN Number:
+      input#isbn.password.form-control(type='text', placeholder='13 digit ISBN number')
+    .form-group
+      label(for='genre') Genre(s):
+      input#genre.password.form-control(type='text', placeholder='genre')
+    .form-group
+      label(for='photo') Cover Photo Url:
+      input#photoUrl.password.form-control(type='text', placeholder='photo url')
+    button.btn.btn-info(type='submit') Add Book
+
+block scripts
+  script(src="/js/addBook.js")

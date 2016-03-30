@@ -1,0 +1,95 @@
+extends layout
+
+block links
+  link(rel='stylesheet', href='/css/loggedInNavbar.css')
+  link(rel='stylesheet', href='/css/transactions.css')
+
+block content
+  h1 Transactions
+  #tableWrapper
+    h2 Trades Awaiting Your Decision
+    table.table.table-hover
+      thead
+        tr
+          th Request From:
+          th You Receive:
+          th You Give: 
+          th Status:
+          th
+          th
+      tbody
+        each trade in receivedTrades
+          tr(data-trade=trade.id)
+            td #{trade.offeringUser.username}
+            td 
+              h3 #{trade.offeredBook.title}
+              img.bookIcon(src=trade.offeredBook.photoUrl)
+            td
+              h3 #{trade.desiredBook.title}
+              img.bookIcon(src=trade.desiredBook.photoUrl)
+            td.pending #{trade.status}
+            td
+              a.accept Accept
+            td 
+              a.decline Decline
+    h2 Your Offered Trades
+    table.table.table-hover
+      thead
+        tr
+          th Request To:
+          th You Receive:
+          th You Give:
+          th Status:
+          th
+      tbody
+        each trade in offeredTrades
+          tr(data-trade=trade.id)
+            td #{trade.receivingUser.username}
+            td
+              h3 #{trade.desiredBook.title}
+              img.bookIcon(src=trade.desiredBook.photoUrl)
+            td 
+              h3 #{trade.offeredBook.title}
+              img.bookIcon(src=trade.offeredBook.photoUrl)
+            td.pending #{trade.status}
+            td
+              a.cancel Cancel Trade
+              
+              
+    h2 Past Transactions
+    table.table.table-hover
+      thead
+        tr
+          th Transaction Partner:
+          th You Receive:
+          th You Give:
+          th Status:
+          th
+      tbody
+        each trade in pastReceivedTrades
+          tr
+            td #{trade.offeringUser.username}
+            td
+              h3 #{trade.offeredBook.title}
+              img.bookIcon(src=trade.offeredBook.photoUrl)
+            td 
+              h3 #{trade.desiredBook.title}
+              img.bookIcon(src=trade.desiredBook.photoUrl)
+            td.status #{trade.status}
+            td
+        each trade in pastOfferedTrades
+          tr
+            td #{trade.receivingUser.username}
+            td
+              h3 #{trade.desiredBook.title}
+              img.bookIcon(src=trade.desiredBook.photoUrl)
+            td 
+              h3 #{trade.offeredBook.title}
+              img.bookIcon(src=trade.offeredBook.photoUrl)
+            td.status #{trade.status}
+            td
+            
+    
+
+block scripts
+  script(src="/js/transactions.js")
